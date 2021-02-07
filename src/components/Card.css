@@ -1,0 +1,9 @@
+.bi {
+    font-size: 25px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.btn {
+    height: min-content;
+}
