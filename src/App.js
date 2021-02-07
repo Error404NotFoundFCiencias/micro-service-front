@@ -1,6 +1,7 @@
 import './App.css';
 import invoices from "./data.json";
 import Invoices from "./components/Invoices";
+import InvoiceForm from "./components/InvoiceForm";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       </div>
         <h2>Agregar</h2>
 
+        <InvoiceForm/>
+        <hr/>
 
         <h2>Facturas</h2>
         <div className="row">

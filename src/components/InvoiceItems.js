@@ -1,5 +1,6 @@
 function InvoiceItems(props) {
     const items = props.data
+    console.log(items)
 
     return (
         <div className="table-responsive">

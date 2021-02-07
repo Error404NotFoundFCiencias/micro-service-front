@@ -1,0 +1,235 @@
+[
+    {
+        "id": 1,
+        "numberInvoice": "12345678",
+        "description": "Factura electronica (con terminal de liverpool)",
+        "customerId": 1,
+        "cardId": 1,
+        "createAt": "2021-02-03",
+        "items": [            {
+            "id": 4,
+            "quantity": 3.0,
+            "price": 2000.0,
+            "productId": 2,
+            "subTotal": 6000.0,
+            "product": {
+                "id": 2,
+                "name": "Mi 10T Lite | 5G",
+                "description": "64MP camera, 120Hz display | SnapdragonTM 750G",
+                "stock": 100.0,
+                "price": 2000.0,
+                "status": "DELETED",
+                "category": {
+                    "id": 2,
+                    "name": "Phones"
+                }
+            }
+        },
+            {
+                "id": 4,
+                "quantity": 3.0,
+                "price": 2000.0,
+                "productId": 2,
+                "subTotal": 6000.0,
+                "product": {
+                    "id": 2,
+                    "name": "Mi 10T Lite | 5G",
+                    "description": "64MP camera, 120Hz display | SnapdragonTM 750G",
+                    "stock": 100.0,
+                    "price": 2000.0,
+                    "status": "DELETED",
+                    "category": {
+                        "id": 2,
+                        "name": "Phones"
+                    }
+                }
+            }
+        ],
+        "state": "CREATED",
+        "customer": {
+            "id": 1,
+            "numberID": "12345678",
+            "firstName": "Juan",
+            "lastName": "Santana",
+            "email": "example@gmail.com",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 1,
+                "name": "Noroeste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CARD",
+        "card": {
+            "id": 1,
+            "number": "1234",
+            "expDate": "2050-04-05T00:00:00.000+00:00",
+            "state": "CREATED"
+        }
+    },
+    {
+        "id": 6,
+        "numberInvoice": "ABCDEF12453213",
+        "description": "Celulares",
+        "customerId": 3,
+        "cardId": null,
+        "createAt": "2021-02-06",
+        "items": [
+            {
+                "id": 4,
+                "quantity": 3.0,
+                "price": 2000.0,
+                "productId": 2,
+                "subTotal": 6000.0,
+                "product": {
+                    "id": 2,
+                    "name": "Mi 10T Lite | 5G",
+                    "description": "64MP camera, 120Hz display | SnapdragonTM 750G",
+                    "stock": 100.0,
+                    "price": 6000.0,
+                    "status": "DELETED",
+                    "category": {
+                        "id": 2,
+                        "name": "Phones"
+                    }
+                }
+            }
+        ],
+        "state": "CREATED",
+        "customer": {
+            "id": 3,
+            "numberID": "12345679",
+            "firstName": "Predo",
+            "lastName": "Martinez",
+            "email": "fofo@ciencias.unam.mx",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 2,
+                "name": "Noreste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CASH",
+        "card": null
+    },
+    {
+        "id": 2,
+        "numberInvoice": "12345678",
+        "description": "Factura electronica (con terminal de liverpool)",
+        "customerId": 1,
+        "cardId": 1,
+        "createAt": "2021-02-03",
+        "items": [],
+        "state": "CREATED",
+        "customer": {
+            "id": 1,
+            "numberID": "12345678",
+            "firstName": "Juan",
+            "lastName": "Santana",
+            "email": "example@gmail.com",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 1,
+                "name": "Noroeste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CARD",
+        "card": {
+            "id": 1,
+            "number": "1234",
+            "expDate": "2050-04-05T00:00:00.000+00:00",
+            "state": "CREATED"
+        }
+    },
+    {
+        "id": 3,
+        "numberInvoice": "12345678",
+        "description": "Factura electronica (con terminal de liverpool)",
+        "customerId": 1,
+        "cardId": 1,
+        "createAt": "2021-02-03",
+        "items": [],
+        "state": "CREATED",
+        "customer": {
+            "id": 1,
+            "numberID": "12345678",
+            "firstName": "Juan",
+            "lastName": "Santana",
+            "email": "example@gmail.com",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 1,
+                "name": "Noroeste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CARD",
+        "card": {
+            "id": 1,
+            "number": "1234",
+            "expDate": "2050-04-05T00:00:00.000+00:00",
+            "state": "CREATED"
+        }
+    },
+    {
+        "id": 4,
+        "numberInvoice": "12345678",
+        "description": "Factura electronica (con terminal de liverpool)",
+        "customerId": 1,
+        "cardId": 1,
+        "createAt": "2021-02-03",
+        "items": [],
+        "state": "CREATED",
+        "customer": {
+            "id": 1,
+            "numberID": "12345678",
+            "firstName": "Juan",
+            "lastName": "Santana",
+            "email": "example@gmail.com",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 1,
+                "name": "Noroeste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CARD",
+        "card": {
+            "id": 1,
+            "number": "1234",
+            "expDate": "2050-04-05T00:00:00.000+00:00",
+            "state": "CREATED"
+        }
+    },
+    {
+        "id": 5,
+        "numberInvoice": "12345678",
+        "description": "Factura electronica (con terminal de liverpool) Factura electronica (con terminal de liverpool)Factura electronica (con terminal de liverpool)Factura electronica (con terminal de liverpool)",
+        "customerId": 1,
+        "cardId": 1,
+        "createAt": "2021-02-03",
+        "items": [],
+        "state": "CREATED",
+        "customer": {
+            "id": 1,
+            "numberID": "12345678",
+            "firstName": "Juan",
+            "lastName": "Santana",
+            "email": "example@gmail.com",
+            "photoUrl": "http://via.placeholder.com/150x200",
+            "region": {
+                "id": 1,
+                "name": "Noroeste"
+            },
+            "state": "CREATED"
+        },
+        "payment": "CARD",
+        "card": {
+            "id": 1,
+            "number": "1234",
+            "expDate": "2050-04-05T00:00:00.000+00:00",
+            "state": "CREATED"
+        }
+    }
+]
