@@ -1,7 +1,7 @@
-import './Card.css'
-import InvoiceItems from "./InvoiceItems";
+import './Invoice.css'
+import InvoiceItems from "../InvoiceItems";
 
-function Card(props) {
+function Invoice(props) {
     const {
         id,
         numberInvoice,
@@ -36,7 +36,7 @@ function Card(props) {
                     <p className="card-text">Total: ${total}</p>
 
                     {payment === 'CARD'
-                        ? <span><i className="bi bi-credit-card-fill text-info"/>Tarjeta</span>
+                        ? <span><i className="bi bi-credit-card-fill text-info"/>Tarjeta {'**** '.repeat(3) + card.number}</span>
                         : <span><i className="bi bi-cash text-success"/>Efectivo</span>}
 
 
@@ -55,4 +55,4 @@ function Card(props) {
     );
 }
 
-export default Card
+export default Invoice

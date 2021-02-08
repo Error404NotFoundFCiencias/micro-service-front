@@ -1,7 +1,7 @@
 import './App.css';
 import invoices from "./data.json";
-import Invoices from "./components/Invoices";
-import InvoiceForm from "./components/InvoiceForm";
+import InvoiceForm from "./components/InvoiceForm/InvoiceForm";
+import Invoice from "./components/Invoice/Invoice";
 
 function App() {
   return (
@@ -14,13 +14,12 @@ function App() {
           </div>
       </div>
         <h2>Agregar</h2>
-
         <InvoiceForm/>
         <hr/>
 
         <h2>Facturas</h2>
         <div className="row">
-          <Invoices data={invoices}/>
+            {invoices.map(invoice => <Invoice data={invoice} key={invoice.id}/>)}
         </div>
 
     </div>

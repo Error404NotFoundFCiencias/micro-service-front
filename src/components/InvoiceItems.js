@@ -1,10 +1,9 @@
 function InvoiceItems(props) {
     const items = props.data
-    console.log(items)
 
     return (
         <div className="table-responsive">
-            <table className="table table-sm table-hover table-secondary">
+            <table className="table table-sm table-hover table-light">
                 <thead>
                 <tr>
                     <th scope="col">Id producto</th>
