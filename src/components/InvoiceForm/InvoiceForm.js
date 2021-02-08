@@ -1,45 +1,49 @@
 import {Component} from "react";
-import users from '../../users.json'
-import products from "../../products.json";
 
 import './InvoiceForm.css'
+
+import {createInvoice, getProducts, getUsers} from "../../api";
 
 class InvoiceForm extends Component {
     constructor(props) {
         super(props);
 
-        const items = products.map( product => (
-            {
-                quantity: 0,
-                price: product.price,
-                productId: product.id
-            }
-        ))
-
         this.state = {
             customerId : -1,
             payment : 'CASH',
-            items: items,
-            cards: []
+            items: [],
+            cards: [],
+            products: [],
+            users: []
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmmit = this.handleSubmmit.bind(this)
     }
 
+    componentDidMount() {
+        getProducts().then(({data}) => {
+            const items = data.map(product => ({quantity: 0, price: product.price, productId: product.id}))
+            this.setState({items: items, products: data});
+        }).catch(e => alert(JSON.stringify(e)))
+        getUsers().then(({data}) => this.setState({users: data}))
+            .catch(e => console.error(e))
+    }
+
     handleSubmmit(event) {
         event.preventDefault()
         let state = this.state
         state.items = state.items.filter(item => item.quantity > 0)
+        delete state.users
+        delete state.products
         delete state.cards
-        alert(JSON.stringify(state))
+        createInvoice(state).then(() => alert('Creada con exito' + JSON.stringify(state)))
     }
 
     handleInputChange(event) {
         let {name, value} = event.target
         if (name === 'customerId') {
-            value = Number(value)
-            const user = users.find(user => user.id === value)
+            const user = this.state.users.find(user => user.id === Number(value))
             this.setState({cards: user?.cards})
         }
         this.setState( { [name]: value} );
@@ -47,12 +51,12 @@ class InvoiceForm extends Component {
 
     handleItemsChange(i, event) {
         let newItems = this.state.items
-        newItems[i].quantity = Number(event.target.value)
+        newItems[i].quantity = event.target.value
         this.setState( {items: newItems} )
     }
 
     render() {
-        const inputProducts = products.map((product,i) => (
+        const inputProducts = this.state.products.map((product,i) => (
             <li className="list-group-item p-0 border-0" key={product.id}>
                 <div className="form-group">
                     <label htmlFor={'product-' + product.id} className="d-flex justify-content-between align-items-end">
@@ -77,7 +81,7 @@ class InvoiceForm extends Component {
             </li>
         ))
 
-        const customers = users.map(customer => (
+        const customers = this.state.users.map(customer => (
             <li className="list-group-item p-0" key={customer.id}>
                 <input type="radio" id={'customer-' + customer.id}
                        name="customerId" value={customer.id}
@@ -115,45 +119,33 @@ class InvoiceForm extends Component {
             <form className="row" onSubmit={this.handleSubmmit}>
                 <div className="col-12">
                     <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        <li className="nav-item" role="presentation">
-                            <a className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                               role="tab" aria-controls="pills-home" aria-selected="true">Usuario</a>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <a className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile"
-                               role="tab" aria-controls="pills-profile" aria-selected="false">Productos</a>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <a className="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-contact"
-                               role="tab" aria-controls="pills-contact" aria-selected="false">Método de pago</a>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <a className="nav-link" id="pills-description-tab" data-bs-toggle="pill" href="#pills-description"
-                               role="tab" aria-controls="pills-description" aria-selected="false">Descripción</a>
-                        </li>
+                        <Tab title="Usuario" to="pills-home" appendClass="active"/>
+                        <Tab title="Productos" to="pills-profile"/>
+                        <Tab title="Método de pago" to="pills-contact"/>
+                        <Tab title="Descripción" to="pills-description"/>
                     </ul>
                 </div>
 
                 <div className="col-12">
                     <div className="tab-content" id="pills-tabContent">
-                        <div className="tab-pane fade show active" id="pills-home" role="tabpanel"
-                             aria-labelledby="pills-home-tab">
+
+                        <TabPanel appendClass="show active" id='pills-home'>
                             <FormControl title="Selecciona un usuario" id="user-control" >
                                 <ul className="list-group">
                                     {customers}
                                 </ul>
                             </FormControl>
-                        </div>
-                        <div className="tab-pane fade" id="pills-profile" role="tabpanel"
-                             aria-labelledby="pills-profile-tab">
+                        </TabPanel>
+
+                        <TabPanel id='pills-profile'>
                             <FormControl title="Selecciona tus productos:" id="product-control">
                                 <ul className="list-group">
                                     {inputProducts}
                                 </ul>
                             </FormControl>
-                        </div>
-                        <div className="tab-pane fade" id="pills-contact" role="tabpanel"
-                             aria-labelledby="pills-contact-tab">
+                        </TabPanel>
+
+                        <TabPanel id="pills-contact">
                             { this.state.customerId !== -1 &&
                             <FormControl title="Selecciona el método de pago" id="payment-control">
                                 <div className="custom-control ">
@@ -180,21 +172,18 @@ class InvoiceForm extends Component {
                                     {cards}
                                 </ul>
                             </FormControl>}
-                        </div>
+                        </TabPanel>
 
-                        <div className="tab-pane fade" id="pills-description" role="tabpanel"
-                             aria-labelledby="pills-description-tab">
+                        <TabPanel id='pills-description'>
                             <FormControl title="Descripción de la factura">
                                 <textarea className="form-control" id="description" name="description" rows="3" value={this.state.description} onChange={this.handleInputChange}/>
                             </FormControl>
-
                             <div className="col d-flex mt-2">
                                 <button className="btn btn-success ml-auto" type="submit">
                                     Crear Factura
                                 </button>
                             </div>
-                        </div>
-
+                        </TabPanel>
                     </div>
                 </div>
             </form>
@@ -213,7 +202,24 @@ function FormControl(prop) {
             <hr/>
         </div>
     )
-    
+}
+
+function Tab(prop) {
+    return (
+        <li className="nav-item" role="presentation">
+            <a className={"nav-link " + prop.appendClass} id={prop.to + "-tab"} data-bs-toggle="pill" href={'#' + prop.to}
+               role="tab" aria-controls={prop.to} aria-selected="true">{prop.title}</a>
+        </li>
+    )
+}
+
+function TabPanel(prop) {
+    return (
+        <div className={"tab-pane fade " + prop.appendClass} id={prop.id} role="tabpanel"
+             aria-labelledby={prop.id + '-tab'}>
+            {prop.children}
+        </div>
+    )
 }
 
 export default InvoiceForm

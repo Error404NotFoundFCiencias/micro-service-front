@@ -2,28 +2,53 @@ import './App.css';
 import invoices from "./data.json";
 import InvoiceForm from "./components/InvoiceForm/InvoiceForm";
 import Invoice from "./components/Invoice/Invoice";
+// import {getInvoices} from './api'
+import {Component} from 'react'
 
-function App() {
-  return (
-    <div className="container">
-      <div className="row mt-5 mb-3">
-          <div className="col">
-              <header>
-                  <h2>Adminstrador de facturas</h2>
-              </header>
-          </div>
-      </div>
-        <h2>Agregar</h2>
-        <InvoiceForm/>
-        <hr/>
+class App extends Component {
+    constructor(props) {
+        super(props);
 
-        <h2>Facturas</h2>
-        <div className="row">
-            {invoices.map(invoice => <Invoice data={invoice} key={invoice.id}/>)}
-        </div>
+        this.state = { invoices: invoices }
+    }
 
-    </div>
-  );
+/*
+    componentDidMount() {
+        getInvoices().then(({data}) => this.setState({invoices: data}))
+            .catch(e => console.error(e))
+    }
+*/
+
+
+    render() {
+        return (
+            <div className="container">
+                <div className="row mt-5 mb-3">
+                    <div className="col">
+                        <header>
+                            <h2>Adminstrador de facturas</h2>
+                        </header>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col border p-4 shadow">
+                        <h2>Agregar</h2>
+                        <InvoiceForm/>
+                    </div>
+                </div>
+
+
+                <div className="row mt-5">
+                    <div className="col p-4 border shadow">
+                        <h2>Facturas</h2>
+                        {this.state.invoices.map(invoice => <Invoice data={invoice} key={invoice.id}/>)}
+                    </div>
+                </div>
+
+            </div>
+        )
+    }
 }
 
 export default App;
