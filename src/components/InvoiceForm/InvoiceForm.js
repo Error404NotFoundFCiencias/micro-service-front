@@ -21,7 +21,16 @@ class InvoiceForm extends Component {
         this.handleSubmmit = this.handleSubmmit.bind(this)
     }
 
-    componentDidMount() {
+    createId() {
+   let chatSet = 'ABCDEFGHIJKLMNOPQRSTUVWXY123456789'
+   let result = ''
+   for (let i = 0; i < 12; i++) {
+   result += chatSet[ Math.floor(Math.random() * 12) ]
+   }
+   return result
+   }
+
+componentDidMount() {
         getProducts().then(({data}) => {
             const items = data.map(product => ({quantity: 0, price: product.price, productId: product.id}))
             this.setState({items: items, products: data});
@@ -37,7 +46,8 @@ class InvoiceForm extends Component {
         delete state.users
         delete state.products
         delete state.cards
-        createInvoice(state).then(() => alert('Creada con exito' + JSON.stringify(state)))
+        state.numberInvoice = this.createId()
+        createInvoice(state).then(() => alert('Creada con exito'))
     }
 
     handleInputChange(event) {
@@ -91,7 +101,7 @@ class InvoiceForm extends Component {
                         {customer.firstName} {customer.lastName}
                         <p className="text-muted">{customer.email}</p>
                         <p>{customer.cards.length > 0
-                            ? customer.cards.length + ' targetas'
+                            ? customer.cards.length + ' tarjetas'
                             : 'Este usuario no tiene tarjetas.'}</p>
                     </div>
                     <i className="bi bi-person-circle"/>
@@ -110,6 +120,7 @@ class InvoiceForm extends Component {
                     <p>{'**** '.repeat(3) + x.number.slice(-4)}</p>
                     <p>{x.name}</p>
                     <p>{x.expDate.slice(0,10)}</p>
+                    <p>Saldo: ${x.balance}</p>
                     <p>{x.bank.name}</p>
                 </label>
             </li>

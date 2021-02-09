@@ -1,24 +1,20 @@
 import './App.css';
-import invoices from "./data.json";
 import InvoiceForm from "./components/InvoiceForm/InvoiceForm";
 import Invoice from "./components/Invoice/Invoice";
-// import {getInvoices} from './api'
+import {getInvoices} from './api'
 import {Component} from 'react'
 
 class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { invoices: invoices }
+        this.state = { invoices: [] }
     }
 
-/*
     componentDidMount() {
         getInvoices().then(({data}) => this.setState({invoices: data}))
             .catch(e => console.error(e))
     }
-*/
-
 
     render() {
         return (

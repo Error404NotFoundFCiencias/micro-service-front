@@ -22,9 +22,6 @@ function Invoice(props) {
                         <p>{createAt}</p>
                         <p>Id de la factura: #{numberInvoice}</p>
                     </div>
-                    <button className="ml-auto btn btn-outline-danger btn-sm" type="button">
-                        borrar
-                    </button>
                 </div>
 
                 <div className="card-body">

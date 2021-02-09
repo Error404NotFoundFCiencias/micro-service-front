@@ -17,9 +17,9 @@ function InvoiceItems(props) {
                 {items.map((item, i) => (
                     <tr key={i}>
                         <th scope="row">{item.id}</th>
-                        <th>{item.product.name}</th>
+                        <th>{item.product?.name}</th>
                         <th>{item.quantity}</th>
-                        <th>{item.product.price}</th>
+                        <th>{item.product?.price}</th>
                         <th>{item.subTotal}</th>
                     </tr>
                 ))}
